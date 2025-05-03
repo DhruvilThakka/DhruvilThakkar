@@ -1,0 +1,26 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main, developer1, developer2, developer3]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest  # GitHub Actions does not support 'windows-11'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
